@@ -1,31 +1,18 @@
 <html>
-
 <head>
-    <title>SVHN Model as a Flask API</title>
+    <title>drink_recommend</title>
     <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-<h1>Flask And Google House Number Predictor</h1>
+<h1>주류 조합 추천</h1>
 <div class="agile-its">
-    <h2>Flask with ML Web Service</h2>
+    <small>총 소요시간 1분</small>
     <div class="w3layouts">
         <div class="photos-upload-view">
-
-            <form id="upload" action="/predict" method="POST" enctype="multipart/form-data">
-                <div class="upload-btn-wrapper">
-                    <button class="btn">이미지 업로드</button>
-                    <input type="file" value="Upload" name="image">
-                </div>
-                <input type="submit" value="예측 결과">
-                {% if label %}
-                    <span class="result_lable">
-                        {{ label }}
-                    </span>
-                {% endif %}
-            </form>
+            <button type="button" onclick="location.href='first.html'">시작하기</button>
         </div>
     </div>
 </div>
