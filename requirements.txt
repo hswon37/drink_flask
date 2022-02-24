@@ -6,3 +6,4 @@ scipy
 virtualenv
 pillow
 joblib
+pandas

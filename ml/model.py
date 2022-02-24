@@ -2,7 +2,8 @@ import scipy.io
 from sklearn.utils import shuffle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.externals import joblib
+import joblib
+import pandas as pd
 
 # Google 주소 숫자 인식 모델 생성
 
