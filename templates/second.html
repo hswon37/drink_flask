@@ -1,9 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>drink_recommend</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Title</title>
     <style>
         /*-- Reset-Code --*/
 	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
@@ -150,21 +149,46 @@ input[type="submit"]{
 .button-1:focus {
   background-color: #F082AC;
 }
+.fw-bold {
+    font-weight: bold;
+    font-size: 20px;
+}
+.btn-click{
+    padding: 10px;
+}
+.text-end{
+    padding: 30px;
+}
+.form-check{
+    padding: 5px;
+}
     </style>
-    <script>
-
-    </script>
 </head>
-
 <body>
-<div id="container">
-    <h2>주류 조합 추천</h2>
-    <p/>
-    <small>총 소요시간 1분</small>
-    <div class="w3layouts">
-        <button class="button-1" role="button" onclick="location.href='choose.html'">시작하기</button>
-    </div>
+<div class="row col-5" id="container">
+    <h4 class="fw-bold text-center mt-3"></h4>
+    <form class=" bg-white px-4" action="third.html">
+        <p class="fw-bold">Q2. 어떤 맛으로 즐기고 싶나요?</p>
+        <br>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="exampleForm" id="radioExample1" />
+            <label class="form-check-label" for="radioExample1">
+                달달한 맛
+            </label>
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="exampleForm" id="radioExample2" />
+            <label class="form-check-label" for="radioExample2">
+                술 맛
+            </label>
+        </div>
+        <div class="text-end">
+            <span class="btn-click">
+                <button class="button-1" role="submit" onclick="location.href='second.html'">next&gt;</button>
+            </span>
+        </div>
+    </form>
+
 </div>
 </body>
-
 </html>

@@ -1,9 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>drink_recommend</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Title</title>
     <style>
         /*-- Reset-Code --*/
 	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
@@ -150,21 +149,41 @@ input[type="submit"]{
 .button-1:focus {
   background-color: #F082AC;
 }
+.fw-bold {
+    font-weight: bold;
+    font-size: 20px;
+}
+.btn-click{
+    padding: 10px;
+}
+.text-end{
+    padding: 30px;
+}
+.form-check{
+    padding: 5px;
+}
     </style>
-    <script>
-
-    </script>
 </head>
-
 <body>
-<div id="container">
-    <h2>주류 조합 추천</h2>
-    <p/>
-    <small>총 소요시간 1분</small>
-    <div class="w3layouts">
-        <button class="button-1" role="button" onclick="location.href='choose.html'">시작하기</button>
-    </div>
+<div class="row col-5" id="container">
+    <h4 class="fw-bold text-center mt-3"></h4>
+    <form class=" bg-white px-4" action="second.html">
+        <p class="fw-bold">당신에게 어울리는 주류 조합은!</p>
+        <br>
+        <span>
+
+        </span>
+        <span>
+            <h2>  +  </h2>
+        </span>
+        <span>
+
+        </span>
+        <div class="text-end">
+            <p class="fw-bold">입니다.</p>
+        </div>
+    </form>
+
 </div>
 </body>
-
 </html>
