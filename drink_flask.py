@@ -26,8 +26,8 @@ def choose():
 @app.route('/first', methods=['GET', 'POST'])
 def first():
     if request.method == 'POST':
-        result = request.form
-        return render_template('second.html', result = result)
+        result = request.form['drink']
+        return render_template('second.html', result=result)
         # return redirect(url_for('second'))
     return render_template('first.html')
 

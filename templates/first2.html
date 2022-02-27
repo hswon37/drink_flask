@@ -167,24 +167,22 @@ input[type="submit"]{
 <body>
 <div class="row col-5" id="container">
     <h4 class="fw-bold text-center mt-3"></h4>
-    <form class=" bg-white px-4" action="second.html">
+    <form class=" bg-white px-4" action=" " method="POST">
         <p class="fw-bold">Q1. 어떤 주류를 원하시나요?</p>
         <br>
         <div class="form-check mb-2">
-            <input class="form-check-input" type="radio" name="drink" id="beer" />
-            <label class="form-check-label" for="beer">
+            <input class="form-check-input" type="radio" name="drink" id="radioExample2" value="beer"/>
                 맥주
             </label>
         </div>
         <div class="form-check mb-2">
-            <input class="form-check-input" type="radio" name="drink" id="wine" />
-            <label class="form-check-label" for="wine">
+            <input class="form-check-input" type="radio" name="drink" id="radioExample4" value="wine"/>
                 와인
             </label>
         </div>
         <div class="text-end">
             <span class="btn-click">
-                <button class="button-1" role="submit" onclick="location.href='second.html'">next&gt;</button>
+                <button type="submit" value="Button" class="button-1" role="submit">next&gt;</button>
             </span>
         </div>
     </form>
