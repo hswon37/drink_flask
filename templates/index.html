@@ -152,17 +152,19 @@ input[type="submit"]{
 }
     </style>
     <script>
-
+function newPage()  {
+  window.location.href = 'choose.html'
+}
     </script>
 </head>
 
 <body>
 <div id="container">
     <h2>주류 조합 추천</h2>
-    <p/>
+    <br>
     <small>총 소요시간 1분</small>
     <div class="w3layouts">
-        <button class="button-1" role="button" onclick="location.href='choose.html'">시작하기</button>
+        <button class="button-1" role="button" onclick="newPage()">시작하기</button>
     </div>
 </div>
 </body>
