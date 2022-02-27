@@ -48,8 +48,8 @@ def first():
     if request.method == 'POST':
         fiResult = request.form['drink']
         #Q1 응답 처리
-        ida.insert_data(1, fiResult)
-
+        ida.insert_data(1, fiResult) 
+        
         return redirect(url_for('second'))
     return render_template('first.html')
 
@@ -59,8 +59,8 @@ def first2():
     if request.method == 'POST':
         fiResult = request.form['drink']
         #Q1 응답 처리
-        ida.insert_data(1, fiResult)
-
+        ida.insert_data(1, fiResult) 
+        
         return redirect(url_for('second'))
     return render_template('first2.html')
 
@@ -71,7 +71,7 @@ def second():
         sResult = request.form['second']
         #Q2 응답 처리
         ida.insert_data(2, sResult)
-
+         
         return redirect(url_for('third'))
     return render_template('second.html')
 
@@ -81,8 +81,8 @@ def third():
     if request.method == 'POST':
         tResult = request.form['third']
         #Q3 응답 처리
-        ida.insert_data(3, tResult)
-
+        ida.insert_data(3, tResult) 
+        
         return redirect(url_for('fourth'))
     return render_template('third.html')
 
@@ -92,10 +92,10 @@ def fourth():
     if request.method == 'POST':
         fResult = request.form['fourth']
         #Q4 응답 처리
-        ida.insert_data(4, fResult)
-
+        ida.insert_data(4, fResult) 
+        
         return redirect(url_for('recommend'))
-    #        return redirect(url_for('result'))
+#        return redirect(url_for('result'))
     return render_template('fourth.html')
 
 #결과 출력
@@ -147,53 +147,53 @@ def recommend():
     #Q2
     q2 = ida.select_answer(2)
     if q2 == "sweet":
-        styles = 'Red' #와인 특(추후 조사 후 수정 필요)
+      styles = 'Red' #와인 특(추후 조사 후 수정 필요)
     elif q2 == "alcohol":
-        styles = ' Pale Lager   International   Premium' #맥주 특(추후 조사 후 수정 필요)
+      styles = ' Pale Lager   International   Premium' #맥주 특(추후 조사 후 수정 필요)
     else:
-        styles = ''
+      styles = ''
     #Q3
     types = ida.select_answer(3)
     #Q4
     q4 = ida.select_answer(4)
     if q4 == "0s":
-        abv1 = '0.0'
-        abv2 = '5.0'
+      abv1 = '0.0'
+      abv2 = '5.0'
     elif q4 == "5s":
-        abv1 = '5.0'
-        abv2 = '10.0'
+      abv1 = '5.0'
+      abv2 = '10.0'
     elif q4 == "10s":
-        abv1 = '10.0'
-        abv2 = '15.0'
+      abv1 = '10.0'
+      abv2 = '15.0'
     elif q4 == "15s":
-        abv1 = '15.0'
-        abv2 = '15.0'
+      abv1 = '15.0'
+      abv2 = '15.0'
     else:
-        abv1 = ''
-        abv2 = ''
-    #계속 이 부분에서 값이 응답된 값 그대로 안나옴. q2,q4를 출력하면 저장된 값이 나오는데, 저 조건문에는 전부 해당이 안됨..문자열이 아닌가?q2, q4 자료형 확인 필요
+      abv1 = ''
+      abv2 = ''
+    
     name = db_connector(types, styles, abv1, abv2) #실제 입력 받기 테스트
-    #    name = db_connector('beer', 'Red', 10.0, 15.0) #주류이름 받기 / 없는 결과 테스트
-    #    name = db_connector('wine', 'Red', 10.0, 15.0) #주류이름 받기 / 와인 테스트
-    #    name = db_connector('beer', ' Pale Lager   International   Premium', 0.0, 5.0) #주류이름 받기 / 맥주 테스트
-
+#    name = db_connector('beer', 'Red', 10.0, 15.0) #주류이름 받기 / 없는 결과 테스트
+#    name = db_connector('wine', 'Red', 10.0, 15.0) #주류이름 받기 / 와인 테스트
+#    name = db_connector('beer', ' Pale Lager   International   Premium', 0.0, 5.0) #주류이름 받기 / 맥주 테스트
+    
     if name == '()':
-        return render_template('resultB.html')
-    #        return "초기 구축단계라 아직 데이터가 부족하여 추천이 불가능합니다. 추후에 다시 테스트하러 오세요!"
+        return render_template('resultB.html') 
+#        return "초기 구축단계라 아직 데이터가 부족하여 추천이 불가능합니다. 추후에 다시 테스트하러 오세요!"
     else:
         #Extract show drink name
         drink_name = str(name[3:-5])
-
+    
         #Get Cosine Similarity
         drink_data = pd.read_excel('/home/ubuntu/drink_flask/static/drink.xlsx')
         cos_sim = make_tfidf_cosine_sim(drink_data)
-
+    
         #Call recommendation engine
         recommended_shows_dict = recommended_shows(drink_name, cos_sim, drink_data)
-
-        return render_template('resultA.html', data = recommended_shows_dict)
-
-
+         
+        return render_template('resultA.html', data = recommended_shows_dict)   
+        
+        
 if __name__ == '__main__':
     # Flask service start
     app.run(host='0.0.0.0', port=8000, debug=True)

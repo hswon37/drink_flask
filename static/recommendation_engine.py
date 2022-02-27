@@ -36,8 +36,8 @@ def recommended_shows(target_name, matrix, shows_df, k=10):
         'recom_name' : recom_name,
         'recom_style' : recom_style
     }
-
-    return pd.DataFrame(d)
+ 
+    return pd.DataFrame(d)   
 #    response = pd.DataFrame(d).to_json(orient = 'records', force_ascii=False)
 
 #    return response
