@@ -36,6 +36,6 @@ def recommended_shows(target_name, matrix, shows_df, k=10):
         'recom_style' : recom_style
     }
 
-    response = pd.DataFrame(d).to_json(orient = 'columns')
+    response = pd.DataFrame(d).to_json(orient = 'columns', force_ascii=False)
 
     return response
