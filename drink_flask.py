@@ -6,9 +6,20 @@ from tfidf_cosine_sim import make_tfidf_cosine_sim #Importing tfdif cosine simil
 import pandas as pd
 from select_db import db_connector #Importing select data in db function
 
-
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
+
+#html 입력 받은 값 저장용
+fiResult = "" #wine or beer
+sResult = "" #sweet or alcohol
+tResult = "" #wine or beer
+fResult = "" #alcohol percentage
+
+#db 전달용
+types = ""
+styles = ""
+abv1 = ""
+abv2 = ""
 
 # 메인 페이지 라우팅
 @app.route("/", methods=['GET', 'POST'])
@@ -20,26 +31,28 @@ def index():
 # Q. 현재 술을 가지고 있나요?
 @app.route('/choose', methods=['GET', 'POST'])
 def choose():
-    if request.method == 'POST':      
-      if request.form['action'] == 'first':
-        return redirect(url_for('first'))
-        
-      elif request.form['action'] == 'first2':
-        return redirect(url_for('first2'))
-        
+    if request.method == 'POST':
+        if request.form['action'] == 'first':
+            return redirect(url_for('first'))
+
+        elif request.form['action'] == 'first2':
+            return redirect(url_for('first2'))
+
     return render_template('choose.html')
-    
+
 # YES 버튼 클릭 후(Q1. 어떤 주류를 가지고 있나요?)
 @app.route('/first', methods=['GET', 'POST'])
 def first():
     if request.method == 'POST':
+        firResult = request.form['drink']
         return redirect(url_for('second'))
     return render_template('first.html')
-    
+
 # NO 버튼 클릭 후 (Q1. 어떤 주류를 원하시나요?)
 @app.route('/first2', methods=['GET', 'POST'])
 def first2():
     if request.method == 'POST':
+        fiResult = request.form['drink']
         return redirect(url_for('second'))
     return render_template('first2.html')
 
@@ -47,6 +60,7 @@ def first2():
 @app.route('/second', methods=['GET', 'POST'])
 def second():
     if request.method == 'POST':
+        sResult = request.form['second']
         return redirect(url_for('third'))
     return render_template('second.html')
 
@@ -54,6 +68,7 @@ def second():
 @app.route('/third', methods=['GET', 'POST'])
 def third():
     if request.method == 'POST':
+        tResult = request.form['third']
         return redirect(url_for('fourth'))
     return render_template('third.html')
 
@@ -61,25 +76,63 @@ def third():
 @app.route('/fourth', methods=['GET', 'POST'])
 def fourth():
     if request.method == 'POST':
-        return redirect(url_for('result'))
+        fResult = request.form['fourth']
+        return redirect(url_for('recommend'))
+#        return redirect(url_for('result'))
     return render_template('fourth.html')
 
 #결과 출력
 @app.route('/result', methods=['GET', 'POST'])
 def result():
     return render_template('result.html')
-    
+
+#출력용 선택지 합치기
+#result = fiResult + " " + sResult + " " + tResult + " " + fResult
+
+#Q1 응답 처리
+if fiResult == "wine":
+  types = 'wine'
+elif fiResult == "beer":
+  types = 'beer'
+
+#Q2 응답 처리
+if sResult == "sweet":
+  styles = 'Red' #와인 특(추후 조사 후 수정 필요)
+elif sResult == "alcohol":
+  styles = ' Pale Lager   International   Premium' #맥주 특(추후 조사 후 수정 필요)
+
+#Q3 응답 처리
+if tResult == "wine":
+  types = 'wine'
+elif tResult == "beer":
+  types = 'beer'
+  
+#Q4 응답 처리
+if fResult == "0s":
+  abv1 = '0.0'
+  abv2 = '5.0'
+elif fResult == "5s":
+  abv1 = '5.0'
+  abv2 = '10.0'
+elif fResult == "10s":
+  abv1 = '10.0'
+  abv2 = '15.0'
+elif fResult == "15s":
+  abv1 = '15.0'
+  abv2 = '15.0'
 
 #추천 결과
 @app.route('/recommend', methods=['GET', 'POST'])
 def recommend():
-    name = db_connector('wine', 'Red', 13) #주류이름 받기 / 와인 테스트
-#    name = db_connector('beer', ' Pale Lager   International   Premium', 5.0) #주류이름 받기 / 맥주 테스트
+#    name = db_connector(types, styles, abv1, abv2) #실제 입력 받기 테스트
+#    name = db_connector('beer', 'Red', 10.0, 15.0) #주류이름 받기 / 없는 결과 테스트
+#    name = db_connector('wine', 'Red', 10.0, 15.0) #주류이름 받기 / 와인 테스트
+    name = db_connector('beer', ' Pale Lager   International   Premium', 0.0, 5.0) #주류이름 받기 / 맥주 테스트
     
     if name == '()':
-        return "초기 구축단계라 아직 데이터가 부족하여 추천이 불가능합니다. 추후에 다시 테스트하러 오세요!"
+        return render_template('resultB.html') 
+#        return "초기 구축단계라 아직 데이터가 부족하여 추천이 불가능합니다. 추후에 다시 테스트하러 오세요!"
     else:
-        #return name[3:-5] #주류 이름 따옴표 없이 출력
         #Extract show drink name
         drink_name = str(name[3:-5])
     
@@ -90,9 +143,9 @@ def recommend():
         #Call recommendation engine
         recommended_shows_dict = recommended_shows(drink_name, cos_sim, drink_data)
          
-        return render_template('result.html', data = recommended_shows_dict)   
-
-    
+        return render_template('resultA.html', data = recommended_shows_dict)   
+        
+        
 if __name__ == '__main__':
     # Flask service start
     app.run(host='0.0.0.0', port=8000, debug=True)
