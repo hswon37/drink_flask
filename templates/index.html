@@ -153,7 +153,7 @@ input[type="submit"]{
     </style>
     <script>
 function newPage()  {
-  window.location.href = 'choose.html'
+  window.location.href = '/choose.html'
 }
     </script>
 </head>
@@ -164,7 +164,9 @@ function newPage()  {
     <br>
     <small>총 소요시간 1분</small>
     <div class="w3layouts">
-        <button class="button-1" role="button" onclick="newPage()">시작하기</button>
+      <form action=" " method="POST">
+        <button type="submit" value="Button" class="button-1" role="button">시작하기</button>
+      </form>
     </div>
 </div>
 </body>
