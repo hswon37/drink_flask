@@ -27,16 +27,14 @@ def choose():
 def first():
     if request.method == 'POST':
         result = request.form['drink']
-        return render_template('second.html', result=result)
-        # return redirect(url_for('second'))
+        return redirect(url_for('second', result=result))
     return render_template('first.html')
 
 @app.route('/first2', methods=['GET', 'POST'])
 def first2():
     if request.method == 'POST':
-        result = request.form
-        return render_template('second.html', result = result)
-        # return redirect(url_for('second'))
+        result = request.form['drink']
+        return redirect(url_for('second', result=result))
     return render_template('first2.html')
 
 @app.route('/second', methods=['GET', 'POST'])
