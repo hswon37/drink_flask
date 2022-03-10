@@ -7,4 +7,4 @@
 추천시스템 구현: python scikit-learn<br>
 데이터 수집: python selenium<br>
 백엔드: python flask<br>
-프론트엔드: ..?<br>
+프론트엔드: Html<br>
